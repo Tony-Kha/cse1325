@@ -3,11 +3,11 @@
 #include <ctime>
 #include <numeric>
 
-void roll(int num, int sides, int rolls){
+void roll(int value, int faces, int rolls){
     for(int i=0; i<rolls; i++){
         std::vector<int>v;
-        for(int j=0; j<num; j++){
-            v.push_back(rand()%sides+1);
+        for(int j=0; j<value; j++){
+            v.push_back(rand()%faces+1);
         }
         std::cout<<"Roll "<<i+1<<": ";
         for(auto x : v) std::cout<<x<<" ";
@@ -18,16 +18,16 @@ void roll(int num, int sides, int rolls){
 int main() {
     srand(time(NULL));
 
-    int num, sides, rolls;
-    std::cout<<"Enter the number of dice to roll"<<std::endl;
-    std::cin>>num;
+    int value, faces, rolls;
+    std::cout<<"Number of dice? ";
+    std::cin>>value;
 
-    std::cout<<"Enter the number of sides for each dice"<<std::endl;
-    std::cin>>sides;
+    std::cout<<"Number of faces per die? ";
+    std::cin>>faces;
 
-    std::cout<<"Enter the number of times to roll"<<std::endl;
+    std::cout<<"Number of rolls? ";
     std::cin>>rolls;
 
-    roll(num,sides,rolls);
+    roll(value,faces,rolls);
 }
 
