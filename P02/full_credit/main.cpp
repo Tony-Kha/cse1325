@@ -1,17 +1,17 @@
 #include <iostream>
-#include <vector>
 #include <ctime>
-#include <numeric>
 
 void roll(int value, int faces, int rolls){
+    int sum, ran;
     for(int i=0; i<rolls; i++){
-        std::vector<int>v;
-        for(int j=0; j<value; j++){
-            v.push_back(rand()%faces+1);
-        }
+        sum = 0;
         std::cout<<"Roll "<<i+1<<": ";
-        for(auto x : v) std::cout<<x<<" ";
-        std::cout<<"Sum: "<<accumulate(v.begin(),v.end(),0)<<"\n";
+        for(int j=0; j<value; j++){
+            ran = rand()%faces+1;
+            sum += ran;
+            std::cout<<ran<<" ";                            
+        }
+        std::cout<<"Sum: "<<sum<<"\n";
     }
 }
 
