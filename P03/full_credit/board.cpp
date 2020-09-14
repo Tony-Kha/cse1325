@@ -30,9 +30,9 @@ Board::Board(int tiles){
 }
 std::string Board::attempt(int tile1, int tile2){
     if(_tiles[tile1].match(_tiles[tile2])){
-        return _tiles[tile1] + std::string{" MATCHES "} + _tiles[tile2];
+        return _tiles[tile1].Tile::word() + std::string(" MATCHES ") + _tiles[tile2].Tile::word();
     }
-    return _tiles[tile1] + std::string{" and "} + _tiles[tile2];
+    return _tiles[tile1].Tile::word() + std::string(" and ") + _tiles[tile2].Tile::word();
 }
 bool Board::solved(){
     for(int i=0; i<_tiles.size(); i++){
