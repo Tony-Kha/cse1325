@@ -1,9 +1,9 @@
 #include "tile.h"
 #include "board.h"
 #include <cstdlib>
-
+int Tile::_width = -1;
+std::string Tile::_blank;
 Tile::Tile(std::string word):_word{word}{
-    _matched = false;
     if(word.length() > _width){
         _width = word.length();
     }
