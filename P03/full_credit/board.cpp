@@ -2,6 +2,7 @@
 #include "tile.h"
 #include <cstdlib>
 #include <algorithm>
+#include <vector>
 
 Board::Board(int tiles){
     std::vector<std::string>words{
@@ -19,20 +20,21 @@ Board::Board(int tiles){
         "race", "read", "reed", "reef", "rice",
         "roof", "sins", "stay", "tame", "teen",
         "tens", "tide", "tied", "tree", "twin",
-        "zero", "zips"
+        "zero", "zips",
     };
     for(int i=0; i<tiles/2; i++){
         _tiles.push_back(words[i]);
         _tiles.push_back(words[i]);
-        Tile add(words[i]);
+        Tile check(words[i]);
     }
     random_shuffle(_tiles.begin(), _tiles.end());
 }
 std::string Board::attempt(int tile1, int tile2){
+    std::string m = " and ";
     if(_tiles[tile1].match(_tiles[tile2])){
-        return _tiles[tile1].Tile::word() + std::string(" MATCHES ") + _tiles[tile2].Tile::word();
+        m = " MATCHES ";
     }
-    return _tiles[tile1].Tile::word() + std::string(" and ") + _tiles[tile2].Tile::word();
+    return _tiles[tile1].Tile::word() + m + _tiles[tile2].Tile::word();
 }
 bool Board::solved(){
     for(int i=0; i<_tiles.size(); i++){
