@@ -4,9 +4,10 @@
 
 class Tile{
     private:
-        std::string _word, _blank;
-        static bool _matched;
-        int _width = -1;
+        std::string _word;
+        static std::string _blank;
+        bool _matched = false;
+        static int _width;
     public:
         Tile(std::string word);
         bool match(Tile& tile);
