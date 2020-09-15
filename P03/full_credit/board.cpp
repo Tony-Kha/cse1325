@@ -22,19 +22,20 @@ Board::Board(int tiles){
         "tens", "tide", "tied", "tree", "twin",
         "zero", "zips",
     };
+    random_shuffle(words.begin(), words.end());
     for(int i=0; i<tiles/2; i++){
-        _tiles.push_back(words[i]);
-        _tiles.push_back(words[i]);
-        Tile check(words[i]);
+        _tiles.push_back(words.at(i));
+        _tiles.push_back(words.at(i));
     }
     random_shuffle(_tiles.begin(), _tiles.end());
 }
 std::string Board::attempt(int tile1, int tile2){
     std::string m = " and ";
     if(_tiles[tile1].match(_tiles[tile2])){
+        _tiles[tile2].match(_tiles[tile1]);
         m = " MATCHES ";
     }
-    return _tiles[tile1].Tile::word() + m + _tiles[tile2].Tile::word();
+    return _tiles[tile1].Tile::word() + m + _tiles[tile2].Tile::word() + "\n";
 }
 bool Board::solved(){
     for(int i=0; i<_tiles.size(); i++){
@@ -49,5 +50,5 @@ std::string Board::to_string(){
         std::cout<<i<<") "<<_tiles[i].Tile::to_string()<<"\n";
     }
     std::cout<<_tiles.size()-1<<") ";
-    return _tiles[_tiles.size()-1].Tile::to_string();
+    return _tiles[_tiles.size()-1].Tile::to_string() + "\n";
 }

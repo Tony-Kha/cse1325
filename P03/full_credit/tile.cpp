@@ -4,7 +4,7 @@
 int Tile::_width = -1;
 std::string Tile::_blank;
 Tile::Tile(std::string word):_word{word}{
-    if(word.length() > _width){
+    if((int)word.length() > _width){
         _width = word.length();
     }
     _blank.resize(_width);

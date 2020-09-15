@@ -15,7 +15,7 @@ int main(){
         std::cin>>tile1;
         std::cin>>tile2;
         std::cout<<game.attempt(tile1, tile2);
-        std::cout<<game.Board::to_string();
+        std::cout<<game.to_string();
         guess++;
         solved = game.solved();
     }
