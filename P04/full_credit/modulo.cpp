@@ -1,4 +1,5 @@
 #include "modulo.h"
+#include <iostream>
 
 int Modulo::compare(const int rhs){
     if(_value < rhs._value) return -1;
@@ -8,7 +9,7 @@ int Modulo::compare(const int rhs){
 
 Modulo::Modulo(int modulo, int value, int offset):_modulo{modulo}, _value{value}, _offset{offset}{}
 
-Modulo::set_nmsd(Modulo* nmsd){ 
+Modulo Modulo::set_nmsd(Modulo* nmsd){ 
     if(++_value==_offset)
         ++nmsd._value;
 }
@@ -39,18 +40,6 @@ Modulo Modulo::operator++(int ignored){
     ++*this;
     return modulo;
 }
-
-inline bool Modulo::operator==(int rhs){return (compare(rhs) == 0);}
-
-inline bool Modulo::operator!=(int rhs){return (compare(rhs) != 0);}  
-
-inline bool Modulo::operator< (int rhs){return (compare(rhs) <  0):}
-
-inline bool Modulo::operator<=(int rhs){return (compare(rhs) <= 0);}
-
-inline bool Modulo::operator> (int rhs){return (compare(rhs) >  0);}
-
-inline bool Modulo::operator>=(int rhs){return (compare(rhs) >= 0);}
 
 std::ostream& operator<<(std::ostream& ost, Modulo& m){
     ost<<m._value;

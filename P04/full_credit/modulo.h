@@ -1,6 +1,7 @@
 #ifndef _MODULO_H
 #define _MODULO_H
 #include <iostream>
+#include <ostream>
 
 class Modulo{
     private:
@@ -15,12 +16,12 @@ class Modulo{
         Modulo operator+(int rhs);
         Modulo& operator++();
         Modulo operator++(int ignored);
-        inline bool operator==(int rhs);
-        inline bool operator!=(int rhs);
-        inline bool operator< (int rhs);
-        inline bool operator<=(int rhs);
-        inline bool operator> (int rhs);
-        inline bool operator>=(int rhs);
+        inline bool operator==(const int rhs){return (compare(rhs) == 0);}
+        inline bool operator!=(const int rhs){return (compare(rhs) != 0);} 
+        inline bool operator< (const int rhs){return (compare(rhs) <  0);}
+        inline bool operator<=(const int rhs){return (compare(rhs) <= 0);}
+        inline bool operator> (const int rhs){return (compare(rhs) >  0);}
+        inline bool operator>=(const int rhs){return (compare(rhs) >= 0);}
         friend std::ostream& operator<<(std::ostream& ost, Modulo& m);
         friend std::istream& operator>>(std::istream& ost, Modulo& m);
 };
