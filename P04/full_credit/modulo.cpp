@@ -31,6 +31,7 @@ Modulo& Modulo::operator++(){
     if(_value > _modulo){
         _value = _offset;
         if(_nmsd){
+            ++_value;
             ++(*_nmsd);
         }
     }
