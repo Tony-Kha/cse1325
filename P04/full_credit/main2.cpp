@@ -22,17 +22,17 @@ int main(){
     std::cin>>step;
 
     int iterations;
-    std::cou<<"How many iterations? ";
+    std::cout<<"How many iterations? ";
     std::cin>>iterations;
 
-    std::cout<<"\mFrom "<<hours<<';'<<minutes<<';'<<seconds<<" counting by "<<step<<" second for "<<iterations<<" iterations\n\n";
+    std::cout<<"\nFrom "<<hours<<':'<<minutes<<':'<<seconds<<" counting by "<<step<<" second for "<<iterations<<" iterations\n\n";
 
     Modulo columns{10};
 
     std::cout<<std::setfill('0');
     while(iterations--){
         seconds+=step;
-        std::cout<<std::setw(2)<<hours<<';'<<std::setw(2)<<minutes<<';'<<std::setw(2)<<seconds<<", ";
+        std::cout<<std::setw(2)<<hours<<':'<<std::setw(2)<<minutes<<':'<<std::setw(2)<<seconds<<", ";
         if(++columns == 0) std::cout<<'\n';
     }
     std::cout<<std::endl;
