@@ -21,8 +21,8 @@ class Modulo{
         inline bool operator<=(int rhs);
         inline bool operator> (int rhs);
         inline bool operator>=(int rhs);
-        friend std::ostream& operator<<(std::ostream& ost, const Modulo& m);
-        friend std::istream& operator>>(std::istream& ost, const Modulo& m);
+        friend std::ostream& operator<<(std::ostream& ost, Modulo& m);
+        friend std::istream& operator>>(std::istream& ost, Modulo& m);
 };
 
 #endif

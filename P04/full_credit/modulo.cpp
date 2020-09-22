@@ -52,12 +52,12 @@ inline bool Modulo::operator> (int rhs){return (compare(rhs) >  0);}
 
 inline bool Modulo::operator>=(int rhs){return (compare(rhs) >= 0);}
 
-std::ostream& operator<<(std::ostream& ost, const Modulo& m){
+std::ostream& operator<<(std::ostream& ost, Modulo& m){
     ost<<m._value;
     return ost;
 }
 
-std::istream& operator>>(std::istream& is, const Modulo& m){
+std::istream& operator>>(std::istream& is, Modulo& m){
     is>>m._value;
     if(m._value > m.modulo)
         throw std::runtime_error{"Invalid number"};
