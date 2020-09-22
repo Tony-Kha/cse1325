@@ -28,10 +28,16 @@ Modulo Modulo::operator+(int rhs){
 
 Modulo& Modulo::operator++(){
     ++_value;
-    if(_value > _modulo){
+    if(_modulo==12){
+        if(_value > _modulo){
+            _value = _offset;
+            if(_nmsd){
+                ++(*_nmsd);
+            }
+        }   
+    }else if(_value >= _modulo){
         _value = _offset;
         if(_nmsd){
-            ++_value;
             ++(*_nmsd);
         }
     }
