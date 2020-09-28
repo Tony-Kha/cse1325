@@ -19,7 +19,7 @@ void Gate::input(Pin pin, Signal signal){
     else if(pin==2){
         _input2 = signal;
     }
-    if(_to_gate==nullptr){
+    if(_to_gate!=nullptr){
         _to_gate->input(_to_pin, output());
     }
 }
@@ -29,4 +29,4 @@ Signal Gate::input(Pin pin){
     return _input2;
 }
 
-Signal Gate::output(){return _input2;}
+Signal Gate::output(){return false;}
