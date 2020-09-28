@@ -20,7 +20,7 @@ void Gate::input(Pin pin, Signal signal){
         signal = _input2;
     }
     if(_to_gate==nullptr){
-        _to_gate->input(_to_pin, signal);
+        _to_gate->input(_to_pin, output());
     }
 }
 

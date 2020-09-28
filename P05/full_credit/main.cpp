@@ -1,4 +1,6 @@
 #include "gate.h"
+#include "and.h"
+#include "or.h"
 #include <iostream>
 
 int main(){

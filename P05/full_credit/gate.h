@@ -17,14 +17,4 @@ class Gate{
         Signal input(Pin pin);
         virtual Signal output();
 };
-
-class And : public Gate{
-    public:
-        Signal output()override{return _input1 && _input2;}
-};
-
-class Or : public Gate{
-    public:
-        Signal output()override{return _input1 || _input2;}
-};
 #endif
