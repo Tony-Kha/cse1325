@@ -7,10 +7,12 @@
 class Mainwin : public Gtk::Window{
     private:       
         Store* store;
-        Label* display;
+        Gtk::Label* display;
         int get_int(std::string prompt);
         double get_double(std::string prompt);
         std::string get_string(std::string prompt);
+        Exposure get_exposure(int num);
+        Material get_material(int num);
     protected:
         void on_new_store_click();
         void on_new_tool_click();
@@ -20,7 +22,7 @@ class Mainwin : public Gtk::Window{
         void on_quit_click();
     public:
         Mainwin();
-        virutal ~Mainwin();
+        virtual ~Mainwin();
 };
 
 #endif
