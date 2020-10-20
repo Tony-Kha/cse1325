@@ -1,30 +1,27 @@
 #include "mainwin.h"
-#include "entrydialog.h"
 #include <iostream>
 
 std::string Mainwin::get_string(std::string prompt){
-    std::string s;
-    std::cout<<prompt;
-    std::getline(std::cin, s);
+    std::string s = prompt;
     return s;
 }
 
 int Mainwin::get_int(std::string prompt){
-    while(true){
-        try{
+    while(true) {
+        try {
             return std::stoi(get_string(prompt));
-        } catch(std::exception& e){
-            std::cerr<<"ERROR: "<<e.what()<<std::endl;
-        }   
+        } catch(std::exception& e) {
+            std::cerr << "ERROR: " << e.what() << std::endl;
+        }
     }
 }
 
 double Mainwin::get_double(std::string prompt){
-    while(true){
-        try{
+    while(true) {
+        try {
             return std::stod(get_string(prompt));
-        } catch(std::exception& e){
-            std::cerr<<"ERROR: "<<e.what()<<std::endl;
+        } catch(std::exception& e) {
+            std::cerr << "ERROR: " << e.what() << std::endl;
         }
     }
 }
@@ -33,7 +30,7 @@ double Mainwin::get_double(std::string prompt){
 
 void Mainwin::on_new_store_click(){
     delete store;
-    Store *store = new Store("store");
+    store = new Store("store");
 }
 void Mainwin::on_new_tool_click(){
     Gtk::Dialog dialog{"New Tool", *this};
@@ -208,7 +205,7 @@ Mainwin::Mainwin() : store{nullptr} {
     Gtk::MenuBar *menubar = Gtk::manage(new Gtk::MenuBar);
     vbox->pack_start(*menubar, Gtk::PACK_SHRINK, 0);
 
-    on_new_store_click();
+   // on_new_store_click();
 
     //      F I L E
     Gtk::MenuItem *menuitem_file = Gtk::manage(new Gtk::MenuItem("_File", true));
@@ -229,19 +226,21 @@ Mainwin::Mainwin() : store{nullptr} {
     Gtk::MenuItem *menuitem_tool = Gtk::manage(new Gtk::MenuItem("_Tool", true));
     menuitem_tool->signal_activate().connect([this] {this->on_new_tool_click();});
     insertmenu->append(*menuitem_tool);
-    //on_view_products_click();
         //  P L A N T
     Gtk::MenuItem *menuitem_plant = Gtk::manage(new Gtk::MenuItem("_Plant", true));
     menuitem_plant->signal_activate().connect([this] {this->on_new_plant_click();});
     insertmenu->append(*menuitem_plant);
-    //on_view_products_click();
         // M U L C H
     Gtk::MenuItem *menuitem_mulch = Gtk::manage(new Gtk::MenuItem("_Mulch", true));
     menuitem_mulch->signal_activate().connect([this] {this->on_new_mulch_click();});
     insertmenu->append(*menuitem_mulch);
-    //on_view_products_click();
+
+    display = Gtk::manage(new Gtk::Label());
+    display->set_hexpand(true);
+    vbox->pack_start(*display, Gtk::PACK_SHRINK, 0);
 
     vbox->show_all();
+    on_new_store_click();
 }
 
 Mainwin::~Mainwin() {}
