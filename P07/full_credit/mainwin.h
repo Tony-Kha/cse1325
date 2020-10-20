@@ -6,8 +6,8 @@
 
 class Mainwin : public Gtk::Window{
     private:       
-        Store* store;
-        Gtk::Label* display;
+        Store *store;
+        Gtk::Label *display;
         int get_int(std::string prompt);
         double get_double(std::string prompt);
         std::string get_string(std::string prompt);

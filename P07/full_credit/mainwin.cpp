@@ -30,7 +30,8 @@ double Mainwin::get_double(std::string prompt){
 
 void Mainwin::on_new_store_click(){
     delete store;
-    store = new Store("store");
+    std::string _store;
+    store = new Store(_store);
 }
 void Mainwin::on_new_tool_click(){
     Gtk::Dialog dialog{"New Tool", *this};
@@ -237,6 +238,7 @@ Mainwin::Mainwin() : store{nullptr} {
 
     display = Gtk::manage(new Gtk::Label());
     display->set_hexpand(true);
+    display->set_vexpand(true);
     vbox->pack_start(*display, Gtk::PACK_SHRINK, 0);
 
     vbox->show_all();
