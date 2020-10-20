@@ -13,7 +13,7 @@ std::string to_string(Exposure exposure);
 
 std::ostream& operator<<(std::ostream& ost, const Exposure& exposure);
 
-class Plant: public product{
+class Plant: public Product{
     private:
         std::string _species;
         Exposure _exposure;

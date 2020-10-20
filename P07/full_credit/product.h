@@ -7,7 +7,7 @@ class Product{
     private:
         static int _nextsn;
         std::string _name;
-        int _stocknum:
+        int _stocknum;
         double _price;
         std::string _description;
     protected:
