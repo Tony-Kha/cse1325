@@ -9,6 +9,7 @@ std::string Mulch::to_string() const{
 
 std::ostream& operator<<(std::ostream& ost, const Material& material){
     ost << to_string(material);
+    return ost;
 }
 
 std::string to_string(Material material){
