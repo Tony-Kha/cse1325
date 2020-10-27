@@ -15,7 +15,7 @@ Store::Store(std::istream& ist){
 void Store::save(std::ostream& ost){
     ost << _name << std::endl;
     for(int i=0; i<_products.size(); i++){
-        ost<< _products.at(i)<<std::endl;
+        ost<< *_products.at(i)<<std::endl;
     }
 }
 void Store::add_product(const Tool& product) {_products.push_back(new Tool{product});}
