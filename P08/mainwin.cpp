@@ -88,11 +88,16 @@ Mainwin::~Mainwin() { }
 
 void Mainwin::on_new_store_click() {
     delete store;
-    store = new Store{"Untitled"};
+    store = new Store{"Store"};
 }
 
 void Mainwin::on_save_click(){
-
+    try{    
+        std::ofstream ofs{store->get_filename()};
+        store->save(ofs);
+    }catch(std::exception e){
+        Gtk::MessageDialog{*this, "Unable to save store"}.run();
+    }
 }
 
 void Mainwin::on_save_as_click(){
@@ -113,17 +118,12 @@ void Mainwin::on_save_as_click(){
     dialog.set_filename("untitled.store");
 
     dialog.add_button("_Cancel", 0);
-    dialog.add_button("_Open", 1);
+    dialog.add_button("_Save", 1);
     int result = dialog.run();
 
     if(result == 1){
-        try{
-            std::ofstream ofs{dialog.get_filename()};
-            store->Store::save(ofs);
-            //if(!ofs)throw std::runtime_error{"Error writing file"};
-        }catch(std::exception& e){
-            Gtk::MessageDialog{*this, "Unable to save store"}.run();
-        }
+        store->set_filename(dialog.get_filename());
+        on_save_click();
     }
 }
 

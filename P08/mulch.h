@@ -12,6 +12,8 @@ enum class Material{
 
 std::string to_string(Material material);
 
+Material mat_from_string(std::string material);
+
 std::ostream& operator<<(std::ostream& ost, const Material& material);
 
 class Mulch : public Product{

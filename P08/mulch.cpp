@@ -5,13 +5,16 @@ Mulch::Mulch(std::string name, double price, std::string description, int volume
 
 Mulch::Mulch(std::istream& ist): Product(ist){
     ist >> _volume;
+    std::string temp;
+    ist >> temp;
+    _material = mat_from_string(temp);
 }
 
 void Mulch::save(std::ostream& ost){
     ost << "mulch\n";
     Product::save(ost);
     ost << _volume << std::endl;
-    Product::save(ost);
+    ost << ::to_string(_material) << std::endl;
 }
 
 std::string Mulch::to_string() const{
@@ -29,4 +32,11 @@ std::string to_string(Material material){
     else if(material == Material::CEDAR) return "cedar";
     else if(material == Material::HARDWOOD) return "hardwood";
     else throw std::out_of_range("Invalid Material value");
+}
+
+Material mat_from_string(std::string material){
+    if(material == "rubber") return Material::RUBBER;
+    else if(material == "pine") return Material::PINE;
+    else if(material == "cedar") return Material::CEDAR;
+    else return Material::HARDWOOD;
 }

@@ -1,10 +1,13 @@
 #include "store.h"
 #include <iostream>
 
-Store::Store(std::string name) : _name{name}{}
+Store::Store(std::string name) : _name{name}, filename{"untitled.store"} {}
+std::string Store::get_filename(){return filename;}
+void Store::set_filename(std::string filename){this->filename = filename;}
+
 Store::Store(std::istream& ist){
-    ist >> _name;
-    for(int i=0; i<_products.size(); i++){
+    std::getline(ist, _name);
+    while(ist){
         std::string type;
         std::getline(ist, type);
         if(type.compare("tool") == 0) _products.push_back(new Tool{ist});
@@ -15,7 +18,8 @@ Store::Store(std::istream& ist){
 void Store::save(std::ostream& ost){
     ost << _name << std::endl;
     for(int i=0; i<_products.size(); i++){
-        ost<< *_products.at(i)<<std::endl;
+        _products.at(i)->save(ost);
+        ost << std::endl;
     }
 }
 void Store::add_product(const Tool& product) {_products.push_back(new Tool{product});}

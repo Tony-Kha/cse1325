@@ -7,17 +7,18 @@ Product::Product(std::string name, double price, std::string description)
 Product::Product(std::istream& ist){
     std::getline(ist, _name);
     std::getline(ist, _description);
-    ist >> _nextsn >> _stocknum >> _price;
+    ist >> _stocknum >> _price;
     ist.ignore(32767, '\n');
 
 }
 
 void Product::save(std::ostream& ost){
-    ost << _nextsn << std::endl;
     ost << _name << std::endl;
+    ost << _description << std::endl;
+    //ost << _nextsn << std::endl;
     ost << _stocknum << std::endl;
     ost << _price << std::endl;
-    ost << _description << std::endl;
+
 }
 
 std::string Product::to_string() const{

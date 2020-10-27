@@ -11,6 +11,8 @@ enum class Exposure{
 
 std::string to_string(Exposure exposure);
 
+Exposure plant_from_string(std::string exposure);
+
 std::ostream& operator<<(std::ostream& ost, const Exposure& exposure);
 
 class Plant: public Product{

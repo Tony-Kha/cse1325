@@ -13,8 +13,12 @@ class Store{
     private:
         std::string _name;
         std::vector<Product*> _products;
+    protected:
+        std::string filename;
     public:
         Store(std::string name);
+        std::string get_filename();
+        void set_filename(std::string filename);
         Store(std::istream& ist);
         void save(std::ostream& ost);
         void add_product(const Tool& product);
