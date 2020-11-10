@@ -1,6 +1,6 @@
 #include "order.h"
 
-Order::Order(Customer& customer): _customer{customer} {}
+Order::Order(const Customer& customer): _customer{customer} {}
 
 //Order::Order(std::istream ist){}
 /*    ist >> _customer;

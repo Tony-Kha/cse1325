@@ -38,11 +38,11 @@ void Store::add_customer(const Customer& customer){_customers.push_back(new Cust
 int Store::customers(){return _customers.size();}
 const Customer& Store::customer(int index){return *_customers.at(index);}
 
-int Store::add_order(Customer& customer){ 
+int Store::add_order(const Customer& customer){ 
     _orders.push_back(new Order{customer});
     return _orders.size()-1;
 }
-void Store::add_item(int order, Product& product, int quantity){ 
+void Store::add_item(int order, const Product& product, int quantity){ 
     _orders.at(order)->Order::add_item(*(new Item{product, quantity}));
 }
 int Store::orders(){return _orders.size();}

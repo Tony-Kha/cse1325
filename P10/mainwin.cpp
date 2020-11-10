@@ -409,7 +409,14 @@ void Mainwin::on_new_order_click(){
 
         orderDialog.get_content_area()->add(orderGrid);
         orderDialog.show_all();
-        orderDialog.run();
+        int orderResponse;
+        if((orderResponse = dialog.run()) == Gtk::RESPONSE_OK){
+            int cust = customer_list.get_active_row_number();
+            int prod = product_list.get_active_row_number();
+            int orderNum = store->add_order(store->customer(cust));
+            store->add_item(orderNum, store->product(prod), Quantity.get_value_as_int());
+            on_view_orders_click();
+        }
         
     }        
 }

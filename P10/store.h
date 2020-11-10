@@ -31,8 +31,8 @@ class Store{
         int customers();
         const Customer& customer(int index);
 
-        int add_order(Customer& customer);
-        void add_item(int order, Product& product, int quantity);
+        int add_order(const Customer& customer);
+        void add_item(int order, const Product& product, int quantity);
         int orders();
         const Order& order(int index);
 

@@ -12,7 +12,7 @@ class Order{
     protected:
         virtual std::string to_string() const;
     public:
-        Order(Customer& customer);
+        Order(const Customer& customer);
         Order(std::istream ist);
         void save(std::ostream ost);
         void add_item(const Item& item);

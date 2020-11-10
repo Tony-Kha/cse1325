@@ -11,7 +11,7 @@ class Item {
         int _quantity;
     public:
         double subtotal();
-        Item(Product& product, int quantity);
+        Item(const Product& product, int quantity);
         Item(std::istream& ist);
         void save(std::ostream& ost);
 };

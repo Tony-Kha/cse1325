@@ -5,7 +5,7 @@ double Item::subtotal(){
     return product;
 }
 
-Item::Item(Product& product, int quantity): _product{nullptr}, _quantity{quantity} {}
+Item::Item(const Product& product, int quantity): _product{nullptr}, _quantity{quantity} {}
 
 /*Item::Item(std::istream& ist){
     ist >> _product >> _quantity;
