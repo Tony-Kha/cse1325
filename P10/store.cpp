@@ -49,12 +49,17 @@ int Store::orders(){return _orders.size();}
 const Order& Store::order(int index){return *_orders.at(index);}
 
 std::string Store::c_to_string(int index){
-    std::stringstream ss;
+    std::ostringstream ss;
     ss << *_customers.at(index);
     std::string s = ss.str();
     return s;
 }
 
-
+std::string Store::p_to_string(int index){
+    std::ostringstream ss;
+    ss << *_products.at(index);
+    std::string s = ss.str();
+    return s;
+}
 
 

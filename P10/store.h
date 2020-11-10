@@ -37,6 +37,7 @@ class Store{
         const Order& order(int index);
 
         std::string c_to_string(int index);
+        std::string p_to_string(int index);
 };
 
 #endif
