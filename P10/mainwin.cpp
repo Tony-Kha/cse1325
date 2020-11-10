@@ -105,10 +105,94 @@ Mainwin::Mainwin() : store{nullptr}, display{new Gtk::Label{}} {
     menuitem_orders->signal_activate().connect([this] {this->on_view_orders_click();});
     viewmenu->append(*menuitem_orders);
 
+    //      T O O L B A R
+    Gtk::Toolbar *toolbar = Gtk::manage(new Gtk::Toolbar);
+    vbox->pack_start(*toolbar, Gtk::PACK_SHRINK, 0);
+
+    //      N E W S T O R E
+    Gtk::ToolButton *new_store_button = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::NEW));
+    new_store_button->set_tooltip_markup("Create a new store, discarding any in progress");
+    new_store_button->signal_clicked().connect([this] {this->on_new_store_click();});
+    toolbar->append(*new_store_button);
+
+    //      O P E N
+    Gtk::ToolButton *open_store_button = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::OPEN));
+    open_store_button->set_tooltip_markup("Open a store file");
+    open_store_button->signal_clicked().connect([this] {this->on_open_click();});
+    toolbar->append(*open_store_button);
+
+    //      S A V E
+    Gtk::ToolButton *save_store_button = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::SAVE));
+    save_store_button->set_tooltip_markup("Save the current store");
+    save_store_button->signal_clicked().connect([this] {this->on_save_click();});
+    toolbar->append(*save_store_button);
+
+    //      S A V E A S
+    Gtk::ToolButton *save_as_store_button = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::SAVE_AS));
+    save_as_store_button->set_tooltip_markup("Save store as another file");
+    save_as_store_button->signal_clicked().connect([this] {this->on_save_as_click();});
+    toolbar->append(*save_as_store_button);
+
+    //      I N S E R T C
+    Gtk::Image* insert_customer_button_image = Gtk::manage(new Gtk::Image{"insertCustomer.png"});
+    Gtk::ToolButton *insert_customer_button = Gtk::manage(new Gtk::ToolButton(*insert_customer_button_image));
+    insert_customer_button->set_tooltip_markup("Insert new customer");
+    insert_customer_button->signal_clicked().connect([this] {this->on_new_customer_click();});
+    toolbar->append(*insert_customer_button);
+
+    //      I N S E R T O
+    Gtk::Image* insert_order_button_image = Gtk::manage(new Gtk::Image{"insertOrder.png"});
+    Gtk::ToolButton *insert_order_button = Gtk::manage(new Gtk::ToolButton(*insert_order_button_image));
+    insert_order_button->set_tooltip_markup("Insert new order");
+    insert_order_button->signal_clicked().connect([this] {this->on_new_order_click();});
+    toolbar->append(*insert_order_button);
+
+    //      I N S E R T T
+    Gtk::Image* insert_tool_button_image = Gtk::manage(new Gtk::Image{"insertTool.png"});
+    Gtk::ToolButton *insert_tool_button = Gtk::manage(new Gtk::ToolButton(*insert_tool_button_image));
+    insert_tool_button->set_tooltip_markup("Insert new tool");
+    insert_tool_button->signal_clicked().connect([this] {this->on_new_tool_click();});
+    toolbar->append(*insert_tool_button);
+
+    //      I N S E R T P
+    Gtk::Image* insert_plant_button_image = Gtk::manage(new Gtk::Image{"insertPlant.png"});
+    Gtk::ToolButton *insert_plant_button = Gtk::manage(new Gtk::ToolButton(*insert_plant_button_image));
+    insert_plant_button->set_tooltip_markup("Insert new plant");
+    insert_plant_button->signal_clicked().connect([this] {this->on_new_plant_click();});
+    toolbar->append(*insert_plant_button);
+
+    //      I N S E R T M
+    Gtk::Image* insert_mulch_button_image = Gtk::manage(new Gtk::Image{"insertMulch.png"});
+    Gtk::ToolButton *insert_mulch_button = Gtk::manage(new Gtk::ToolButton(*insert_mulch_button_image));
+    insert_mulch_button->set_tooltip_markup("Insert new mulch");
+    insert_mulch_button->signal_clicked().connect([this] {this->on_new_mulch_click();});
+    toolbar->append(*insert_mulch_button);
+
+    //      V I E W C
+    Gtk::Image* view_customers_button_image = Gtk::manage(new Gtk::Image{"viewCustomers.png"});
+    Gtk::ToolButton *view_customers_button = Gtk::manage(new Gtk::ToolButton(*view_customers_button_image));
+    view_customers_button->set_tooltip_markup("View all customers");
+    view_customers_button->signal_clicked().connect([this] {this->on_view_customers_click();});
+    toolbar->append(*view_customers_button);
+
+    //      V I E W O
+    Gtk::Image* view_orders_button_image = Gtk::manage(new Gtk::Image{"viewOrders.png"});
+    Gtk::ToolButton *view_orders_button = Gtk::manage(new Gtk::ToolButton(*view_orders_button_image));
+    view_orders_button->set_tooltip_markup("View all orders");
+    view_orders_button->signal_clicked().connect([this] {this->on_view_orders_click();});
+    toolbar->append(*view_orders_button);
+
+    //      V I E W P
+    Gtk::Image* view_plants_button_image = Gtk::manage(new Gtk::Image{"viewPlants.png"});
+    Gtk::ToolButton *view_plants_button = Gtk::manage(new Gtk::ToolButton(*view_plants_button_image));
+    view_plants_button->set_tooltip_markup("View all plants");
+    view_plants_button->signal_clicked().connect([this] {this->on_view_products_click();});
+    toolbar->append(*view_plants_button);
+
     display = Gtk::manage(new Gtk::Label());
     display->set_hexpand(true);
     display->set_vexpand(true);
-    vbox->add(*display);
+    vbox->pack_start(*display, Gtk::PACK_SHRINK, 0);
     
     vbox->show_all();
 
@@ -297,7 +381,35 @@ void Mainwin::on_new_order_click(){
         Gtk::Dialog orderDialog{"Add to Order", *this};
         Gtk::Grid orderGrid;
         
+        std::ostringstream oss;
+        oss << store->customer(customer_list.get_active_row_number());
+        Gtk::Label o{oss.str()};
+        orderGrid.attach(o, 0,0,1,1);
+
+        Gtk::ComboBoxText product_list;
+        for(int i=0; i<store->products(); ++i){
+            std::string Product = store->p_to_string(i);
+            product_list.append(Product);
+        }
+        product_list.set_active(0);
+
+        orderGrid.attach(product_list, 0,5,1,2);
         
+        Gtk::Label q_label{"Quantity"};
+        Gtk::SpinButton Quantity;
+        Quantity.set_range(0,99);
+        Quantity.set_increments(1,5);
+        Quantity.set_value(1);
+
+        orderGrid.attach(q_label, 0,7,1,1);
+        orderGrid.attach(Quantity, 1,7,2,1);
+
+        orderDialog.add_button("OK", Gtk::RESPONSE_CANCEL);
+        orderDialog.add_button("Add to Order", Gtk::RESPONSE_OK);
+
+        orderDialog.get_content_area()->add(orderGrid);
+        orderDialog.show_all();
+        orderDialog.run();
         
     }        
 }
@@ -342,7 +454,15 @@ void Mainwin::on_about_click(){
     dialog.set_license_type(Gtk::License::LICENSE_GPL_3_0);
     std::vector< Glib::ustring > authors = {"Tony Kha (also prof Rice)"};
     dialog.set_authors(authors);
-    std::vector< Glib::ustring > artists = {"Logo by clipartmax.com, licensed for personal use https://www.clipartmax.com/middle/m2i8N4d3H7G6K9A0_retail-shops-retail-store-vector-png/"};
+    std::vector< Glib::ustring > artists = {"Logo by clipartmax.com, licensed for personal use https://www.clipartmax.com/middle/m2i8N4d3H7G6K9A0_retail-shops-retail-store-vector-png/ \nIcons by: "};
+    artists.push_back("https://www.thenounproject.com/term/new-user/70749/ \n");
+    artists.push_back("https://www.kindpng.com/imgv/iiTmxbw_shopping-cart-png-download-image-shopping-cart-svg/ \n");
+    artists.push_back("https://www.pngwing.com/en/free-png-moyeb \n");
+    artists.push_back("https://www.cleanpng.com/png-plant-computer-icons-botany-2463193/preview.html \n");
+    artists.push_back("https://www.getsoil.com/products/mulches/ \n");
+    artists.push_back("https://favpng.com/png_view/membership-users-group-computer-icons-png/kHhDb9NE \n");
+    artists.push_back("https://favpng.com/png_view/receipt-receipt-invoice-png/cuZCZ3Xg \n");
+    artists.push_back("https://www.klipartz.com/en/sticker-png-polbb \n");
     dialog.set_artists(artists);
     dialog.run();
 }
