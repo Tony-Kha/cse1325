@@ -5,8 +5,12 @@ Mainwin::Mainwin() : store{nullptr}, display{new Gtk::Label{}} {
     set_default_size(640, 480);
     set_title("Manga Magic");
 
+    Gtk::ScrolledWindow *scroll_win = Gtk::manage(new Gtk::ScrolledWindow);
+    add(*scroll_win);
+
     Gtk::Box *vbox = Gtk::manage(new Gtk::VBox);
-    add(*vbox);
+    //add(*vbox);
+    scroll_win->add(*vbox);
 
     Gtk::MenuBar *menubar = Gtk::manage(new Gtk::MenuBar);
     vbox->pack_start(*menubar, Gtk::PACK_SHRINK, 0);
@@ -194,7 +198,7 @@ Mainwin::Mainwin() : store{nullptr}, display{new Gtk::Label{}} {
     display->set_vexpand(true);
     vbox->pack_start(*display, Gtk::PACK_SHRINK, 0);
     
-    vbox->show_all();
+    scroll_win->show_all();
 
     on_new_store_click();
 }
