@@ -5,13 +5,22 @@ const int MAX_COLOR = 255;
 Mandelbrot::Mandelbrot(int width, int height, int icount, int nthreads) 
   : _width{width}, _height{height}, _icount{icount} {
 
+    std::thread t[nthreads];
     // Allocate memory for the results
     _values = new int[_width * _height];
     
     // Calculate the results
-    for (int y = 0; y < _height; y++)  {
+    /*for (int y = 0; y < _height; y++)  {
         calculate_rows(y, y);
+    }*/
+
+    for(int i=0; i<nthreads; i++){
+        t[i] = std::thread{&Mandelbrot::calculate_rows, this, 0, height};
     }
+    for(int i=0; i<nthreads; i++){
+        t[i].join();
+    }
+
 }
 
 // Deallocate results memory
