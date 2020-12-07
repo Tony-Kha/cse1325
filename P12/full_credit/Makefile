@@ -1,4 +1,4 @@
-CXXFLAGS = --std=c++17 -pthreads
+CXXFLAGS = --std=c++17 -pthread
 
 all: mandelbrot
 
