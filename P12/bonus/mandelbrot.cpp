@@ -14,8 +14,9 @@ Mandelbrot::Mandelbrot(int width, int height, int icount, int nthreads)
     /*for (int y = 0; y < _height; y++)  {
         calculate_rows(y, y);
     }*/
+    int nheight = _height/nthreads;
     for(int i=0; i<nthreads; i++){
-        t[i] = std::thread{calculate_rows, height/nthreads};
+        t[i] = std::thread{&Mandelbrot::calculate_rows, &nheight};
     }
     for(int i=0; i<nthreads; i++){
         t[i].join();
