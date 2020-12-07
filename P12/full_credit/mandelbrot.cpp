@@ -1,4 +1,5 @@
 #include "mandelbrot.h"
+#include <thread>
 
 const int MAX_COLOR = 255;
 
