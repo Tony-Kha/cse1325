@@ -1,0 +1,29 @@
+QUESTION 1: Which values of width, height, and icount did you select for your machine to generate a Mandelbrot image with 1 thread with around a 30 second runtime: 
+            
+            Answer: 1500 1500 500
+
+QUESTION 2: Provide the output of ``time ./mandelbrot `` *width height icount nthreads* for runs with 1 through 16 threads below. You can run all of these with a single bash command if you like: ``for i in {1..16} ; do time ./mandelbrot 2000 2000 500 $i ; done``
+
+Example Timing:
+
+  width: 2000  height: 2000  icount: 500  threads: 1
+  wrote: image.ppm
+
+real	0m28.751s
+user	0m28.715s
+sys	0m0.020s
+
+
+YOUR Timing:
+real    1m2.957s
+user    1m2.815s
+sys     0m0.092s
+
+QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
+
+    Answer: For the most part it will speed up. However, there is a way for threads to slow down a program and that's if you add too many threads. Example, having 1 core but using 50 threads.
+
+
+QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
+    
+    Answer: Yes because multiple things would be running. For the program to work faster, there would have to be an increase in the load average.
